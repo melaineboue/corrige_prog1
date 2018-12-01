@@ -36,3 +36,51 @@ public int numberOfNodes()
 	}	
 	return number_of_nodes;
 }
+
+
+Question 5 
+
+public boolean addAux(Iterator<PostCard> it, PostCard postcard)
+{
+	PostCard value = it.getValue();
+	boolean isAdded = false;
+	
+	if(it.nodeType()!=LEAF && value.number != postcard.number)
+	{
+		if(postcard.number < value.number)
+		{
+			it.goLeft();
+			isAdded = addAux(it,postcard);
+			it.goUp();
+			if(isAdded)
+			{
+				if(postcard.number < value.minimum )
+					value.minimum = postcard.minimum; //mettre à jour le minimum si l'element ajouté a un number le plus petit
+			}	
+		}			
+		if(postcard.number > value.number)
+		{
+			it.goRight();
+			isAdded = addAux(it,postcard);
+			it.goUp();
+			if(isAdded)
+				value.rightTotal++;  //incrementer de 1 si le nouvel element
+		}
+		if(postcard.number == value.number)
+		{
+			it.goUp();
+			addAux(it);
+		}
+	}
+	else if(value.number == postcard.number)
+	{
+		return false;
+	}
+	else
+	{	
+		postcard.minimum = postcard.number;
+		postcard.rightTotal = 0;
+		it.AddValue(postcard);
+		return true;
+	}
+}
