@@ -85,3 +85,10 @@ public void mergeSchedules(BusDepot newDepot)
 		}
 	}
 }
+
+
+
+
+
+
+L'Exercice 2 plus tard
