@@ -98,14 +98,119 @@ public void addNewStock(StoreStocks stocks)
 
 Exercice 2
 
+
 Question 1
+
+public boolean exists(String countyName)
+{
+	Iterator<Country> it = iterator();
+	while(it.nodeType()!=LEAF || it.nodeType()!=SENTINEL)
+	{
+		Country pays = it.getValue();
+		if(pays.name.equals(countyName))
+			return true;
+		if(pays.compareTo(countyName) > 0)
+			it.goLeft();
+		else if(pays.compareTo(countyName))
+			it.goRight();
+	}
+	return false;
+}
 
 Question 2
 
+public void printNodeOf(int depth)
+{
+	printNodeOfAux(iterator(),depth,0);
+}
+
+public void printNodeOfAux(Iterator<Country> it, int depth, int profondeur)
+{
+	if(it.nodeType()!=LEAF || it.nodeType()!=SENTINEL
+	{
+		it.goLeft();
+		profondeur++;
+		printNodeOfAux(it,depth,profondeur);
+		it.goUp();
+		profondeur--;
+		if(profondeur == depth)
+			System.out.println(it.getValue().name);
+		it.goRight();
+		profondeur++;
+		printNodeOfAux(it,depth,profondeur);
+		it.goUp();
+		profondeur--;
+	}
+	else 
+	{
+		if(profondeur == depth)
+			System.out.println(it.getValue().name);
+	}
+}
+
 
 Question 3
+public Country largestCountry()
+{
+	Country pays = null;
+	largestCountryAux(iterator(),pays);
+}
+
+public void largestCountryAux(Iterator<Country> it, Country pays)
+{
+	if(pays==null || it.getValue().surface > pays.surface)
+		pays = it.getValue();
+	
+	
+	if(it.nodeType()!=LEAF || it.nodeType()!=SENTINEL
+	{
+		it.goLeft();
+		largestCountryAux(it,pays);
+		it.goUp();
+		it.goRight();
+		largestCountryAux(it,pays);
+		it.goUp();
+	}
+}
 
 Question 4
+public boolean isPerfect()
+{
+	ArrayList<Integer> distances = new ArrayLis<Integer>();
+	isPerfectAux(iterator(),distances);
+	if(distances.size()!=0)
+	{
+		Integer nombre = distances.get(0);
+		for(Integer nombre_current : distances)
+		{
+			if(nombre != nombre_current)
+				return false;
+		}
+	}
+	return true;
+}
+
+public void isPerfectAux(Iterator<Country> it, ArrayList<Integer> distances, profondeur)
+{
+	
+	if(it.nodeType()!=SENTINEL)
+	{
+		it.goLeft();
+		profondeur++;
+		isPerfectAux(it,distances,profondeur);
+		it.goUp();
+		profondeur--;
+		if(profondeur == depth)
+			System.out.println(it.getValue().name);
+		it.goRight();
+		profondeur++;
+		isPerfectAux(it,distances,profondeur);
+		it.goUp();
+		profondeur--;
+	}
+	else 
+		distances.add(profondeur);
+}
 
 
 Question 5
