@@ -41,3 +41,40 @@ public removeCertificate(String certificateId)
 		this.getValue(employeeId).remove(certificateId);
 	}
 }
+
+Question 4
+public int numberOfCertificates()
+{
+	Iterator<String> it = iterator();
+	Set<String> certificates = new HashSet<String>();
+	
+	while(it.hasNext())
+	{
+		String employeeId = it.next();
+		Set<String> current_certificates = this.getValue(employeeId);
+		certificates.AddAll(this.getValue(employeeId));
+	}
+	return certificates.size();
+}
+
+
+Question 5
+public void addCertificates(Table<String,String> table)
+{
+	Iterator<String> it = table.iterator();
+	while(it.hasNext())
+	{
+		String employee = it.next();
+		String certificate = table.getValue(employee);
+		if(this.contains(employee))
+		{
+			this.getValue(employee).add(certificate);
+		}
+		else
+		{
+			Set<String> nouveau_certificat = new HashSet<String>();
+			nouveau_certificat.add(certificate)
+			this.addValue(employee,nouveau_certificat);
+		}
+	}
+}
