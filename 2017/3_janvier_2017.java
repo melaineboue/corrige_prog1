@@ -210,3 +210,34 @@ public void sameStructureAux(Iterator<Company> it,Iterator<Company> it2, boolean
 
 
 Question 5
+public void printAllPaths()
+{
+	ArrayList<String> path = new ArrayList<String>();
+	printAllPathsAux(iterator(),path);
+}
+
+
+public void printAllPathsAux(Iterator<Company> it, ArrayList<String> path)
+{
+	Company entreprise = it.getValue();
+	path.add(entreprise.name);
+	
+	if(it.nodeType()!=LEAF)
+	{
+		it.goLeft();
+		printAllPathsAux(it);
+		it.goUp();
+		path.remove(path.size()-1);
+		it.goRight();
+		printAllPathsAux(it);
+		it.goUp();
+		path.remove(path.size()-1);
+		
+	}
+	else 
+	{
+		for(String name: path)
+			System.out.print(name + " ");
+		System.out.println();
+	}
+}
