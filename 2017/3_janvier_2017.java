@@ -183,7 +183,30 @@ public void printSameSirenNumberAux(Iterator<Company> it, long sirenCode)
 	}
 }
 
+
 Question 4
+public boolean sameStructure(CompanyIndex index)
+{
+	boolean isSame = true;
+	sameStructureAux(this.iterator(), index.iterator(), isSame);
+	return isSame;
+}
+
+public void sameStructureAux(Iterator<Company> it,Iterator<Company> it2, boolean isSame)
+{
+	if(it.nodeType()!=it2.nodeType())
+		isSame = false;
+	
+	if(it.nodeType()!=SENTINEL && it2.nodeType()!=SENTINEL && isSame)
+	{
+		it.goLeft();
+		sameStructureAux(it, it2,isSame);
+		it.goUp();
+		it.goRight();
+		sameStructureAux(it, it2,isSame);
+		it.goUp();
+	}
+}
 
 
 Question 5
