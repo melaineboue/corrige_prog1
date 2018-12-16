@@ -159,3 +159,31 @@ public int numberOfCompanies(){
 	}
 	return nombre;
 }
+
+
+Question 3 
+public void printSameSirenNumber(long sirenCode)
+{
+	printSameSirenNumberAux(iterator(), sirenCode);
+}
+
+public void printSameSirenNumberAux(Iterator<Company> it, long sirenCode)
+{
+	Company compagnie = it.getValue();
+	if(it.nodeType()!=SENTINEL)
+	{
+		it.goLeft();
+		printSameSirenNumberAux(it,sirenCode);
+		if((sirenCode+"").equals((compagnie.siretCode+"").substring(0,9)))
+			System.out.println(compagnie.name);
+		it.goUp();
+		it.goRight();
+		printSameSirenNumberAux(it,sirenCode);
+		it.goUp();
+	}
+}
+
+Question 4
+
+
+Question 5
