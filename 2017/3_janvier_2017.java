@@ -146,3 +146,16 @@ public boolean memberCompany(long siretCode)
 	}
 	return false;
 }
+
+
+Question 2
+public int numberOfCompanies(){
+	int nombre = 0;
+	Iterator<Company> it = this.iterator();
+	while(it.nodeType()!=SENTINEL)
+	{
+		nombre+=it.getValue().rightTotal+1;
+		it.goLeft();
+	}
+	return nombre;
+}
