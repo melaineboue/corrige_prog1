@@ -52,7 +52,7 @@ public int numberOfCertificates()
 	{
 		String employeeId = it.next();
 		Set<String> current_certificates = this.getValue(employeeId);
-		certificates.AddAll(this.getValue(employeeId));
+		certificates.union(this.getValue(employeeId));
 	}
 	return certificates.size();
 }
