@@ -90,5 +90,123 @@ public void mergeSchedules(BusDepot newDepot)
 
 
 
+Exercice 2
+Question 1
+public boolean isEnrolled(int id)
+{
+	Iterator<Student> it = iterator();
+	while(it.nodeType()!=LEAF)
+	{
+		Student etudiant = it.getValue();
+		if(etudiant.id == id)
+			return true;
+		else if(id < etudiant.id)
+			it.goLeft();
+		else 
+			it.goRight();
+	}
+	return false;
+}
 
-L'Exercice 2 plus tard
+
+Question 2
+public boolean hasOnlyOneranch()
+{
+	Iterator<Student> it = iterator();
+	while(it.nodeType()!=LEAF)
+	{
+		if(it.nodeType()==DOUBLE)
+			return false;
+		else if (it.nodeType()==SIMPLE_LEFT)
+			it.goLeft();
+		else 
+			it.goRight();
+	}
+	return true;
+}
+
+
+Question 3
+public String longestName()
+{
+	String long_nom = "";
+	longestNameAux(iterator(), long_nom);
+	return long_nom;
+}
+
+public void longestNameAux(Iterator<Student> it, String long_nom)
+{
+	if(it.getValue().name.length()> long_nom.length())
+		long_nom = it.getValue().name;
+	
+	if(it.nodeType()!=LEAF)
+	{
+		it.goLeft();
+		longestNameAux(it,long_nom);
+		it.goUp();
+		it.goRight();
+		longestNameAux(it,long_nom);
+		it.goUp();
+	}
+}
+
+
+Question 4
+public int height()
+{
+	return heightAux(iterator());
+}
+
+public int heightAux(Iterator<Student> it)
+{
+	if(it.nodeType()!=LEAF || it.nodeType()!=SENTINEL)
+	{
+		it.goLeft();
+		int long_gauche = longestNameAux(it,long_nom);
+		it.goUp();
+		it.goRight();
+		int long_droite = longestNameAux(it,long_nom);
+		it.goUp();
+		return (long_gauche > long_droite)?long_gauche+1:long_droite+1;
+	}
+	else if(it.nodeType()!=LEAF)
+		return -1;
+	else
+		return -2;
+}
+
+
+Question 5
+public int enrollAux(Iterator<Student> it, Student student)
+{
+	Student etudiant = it.getValue();
+	int hauteur = 0;
+	if(it.nodeType()!=SENTINEL)
+	{
+		if(student.id < etudiant.id)
+		{
+			etudiant.leftTotal++;
+			it.goLeft();
+			hauteur = enrollAux(it,student) + 1;
+			it.goUp();
+			return hauteur;
+		}	
+		else if(student.id > etudiant.id)
+		{
+			
+			it.goRight();
+			hauteur = enrollAux(it,student) + 1;
+			it.goUp();
+			etudiant.rightHeight = (hauteur > etudiant.rightHeight) ? hauteur : etudiant.rightHeight;
+			return hauteur;
+		}
+	}
+	else
+	{
+		student.rightHeight = -1;
+		student.leftTotal = 0;
+		it.setValue(student);
+		return 0;
+	}
+	
+}
