@@ -154,6 +154,7 @@ public Country largestCountry()
 {
 	Country pays = null;
 	largestCountryAux(iterator(),pays);
+	return pays;
 }
 
 public void largestCountryAux(Iterator<Country> it, Country pays)
@@ -200,8 +201,6 @@ public void isPerfectAux(Iterator<Country> it, ArrayList<Integer> distances, pro
 		isPerfectAux(it,distances,profondeur);
 		it.goUp();
 		profondeur--;
-		if(profondeur == depth)
-			System.out.println(it.getValue().name);
 		it.goRight();
 		profondeur++;
 		isPerfectAux(it,distances,profondeur);
@@ -214,4 +213,28 @@ public void isPerfectAux(Iterator<Country> it, ArrayList<Integer> distances, pro
 
 
 Question 5
+
+public void add Country(Country country)
+{
+	Iterator<Country> it = iterator();
+	boolean trouve = false;
+	while(it.nodeType()!=SENTINEL)
+	{
+		Country pays = it.getValue();
+		if(pays.name.equals(countyName))
+		{
+			trouve true;
+			break;
+		}
+			
+		if(pays.compareTo(country.name) > 0)
+			it.goLeft();
+		else if(pays.compareTo(country.name))
+			it.goRight();
+	}
+	
+	if(!trouve)
+		it.setValue(country);
+	
+}
 
