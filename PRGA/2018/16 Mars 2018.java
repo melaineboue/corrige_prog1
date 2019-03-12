@@ -63,18 +63,54 @@ class TableNomen implements Nomenclature
 	public Entree getPere(Entree entree)
 	{
 		String codePere = les_entrees.get(entree.getCode()).getCodePere();
-		return les_entrees.get(codePere);
+		if(codePere == null)
+			return null;
+		else
+			return les_entrees.get(codePere);
 	}
 	
 	public int getNiveau(Entree entree)
 	{
-		
+		//on va parcourir tous ses parents (père, grand père, arrière grand père,...) en les comptant. Son niveau egal au nombre de ses parents +1
+		int niveau = 1;
+		Entree entree_copie = entree.clone(); // on le clone pour eviter les changement de valeur par reference
+		while(entree_copie.getCodePere()!=null)
+		{
+			entree_copie = les_entrees.get(entree.getCodePere());
+			niveau++;
+		}
+		return niveau;
 	}
-	public boolean ajoutPossible(Entree e);
-	public void ajouter(Entree e);
+	
+	public boolean ajoutPossible(Entree e)
+	{
+		if(!les_entrees.contains(e.getCodePere()) || e.getCode()=="" || e.getLibelle() =="" || les_entrees.contains(e.getCode() )
+		{
+			//si le codePère est absent
+			//si le code est absent 
+			//si le libelle est absent
+			//si la nomenclature contient déjà le code de l'element
+			return false;
+		}
+		else 
+		{
+			return true;
+		}
+	}
+	
+	
+	public void ajouter(Entree e) throws Exception
+	{
+		if(!ajouterPossible(e))
+		{
+			//si on peut pas ajouter l'entree e, on lève une exception
+			throws Exception();
+		}
+		else 
+		{
+			les_entrees.put(e.getCode(), e); //on l'ajoute dans la table, avec pour clé son code
+		}
+	}
+	
 }
-
-ajouterPossible()
-
-ajouter()
 
