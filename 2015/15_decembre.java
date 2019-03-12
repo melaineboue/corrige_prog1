@@ -31,7 +31,8 @@ public int numberOfNodes()
 	
 	while(it.nodeType()==SIMPLE_LEFT || t.nodeType()==DOUBLE)
 	{
-		number_of_nodes += it.getValue().rightTotal + 1; //le nombre du fils droit plus l'element courant
+		//le nombre du fils droit plus l'element courant
+		number_of_nodes += it.getValue().rightTotal + 1; 
 		it.goLeft();
 	}	
 	return number_of_nodes;
@@ -55,7 +56,8 @@ public boolean addAux(Iterator<PostCard> it, PostCard postcard)
 			if(isAdded)
 			{
 				if(postcard.number < value.minimum )
-					value.minimum = postcard.minimum; //mettre à jour le minimum si l'element ajouté a un number le plus petit
+					//mettre à jour le minimum si l'element ajouté a un number le plus petit
+					value.minimum = postcard.minimum; 
 			}	
 		}			
 		if(postcard.number > value.number)

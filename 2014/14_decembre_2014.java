@@ -151,28 +151,30 @@ public void longestNameAux(Iterator<Student> it, String long_nom)
 }
 
 
+Examen 14 decembre 2014 (A Corriger)
 Question 4
 public int height()
 {
-	return heightAux(iterator());
+	if(this.isEmpty())
+		return -1;
+	else
+		return heightAux(iterator());
 }
 
 public int heightAux(Iterator<Student> it)
 {
-	if(it.nodeType()!=LEAF || it.nodeType()!=SENTINEL)
+	Student etudiant = it.getValue();
+	if(it.nodeType()!=LEAF && it.nodeType()!=SIMPLE_RIGHT)
 	{
 		it.goLeft();
-		int long_gauche = longestNameAux(it,long_nom);
+		int long_gauche = heightAux(it);
 		it.goUp();
-		it.goRight();
-		int long_droite = longestNameAux(it,long_nom);
-		it.goUp();
-		return (long_gauche > long_droite)?long_gauche+1:long_droite+1;
+		return (long_gauche > etudiant.rightHeight)?long_gauche+1:rightHeight+1;
 	}
-	else if(it.nodeType()!=LEAF)
+	else if(it.nodeType()!=SIMPLE_RIGHT )
+		return etudiant.rightHeight + 1;
+	else 
 		return -1;
-	else
-		return -2;
 }
 
 
