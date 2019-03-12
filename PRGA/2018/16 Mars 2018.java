@@ -114,3 +114,28 @@ class TableNomen implements Nomenclature
 	
 }
 
+
+
+
+
+
+Question 2.2
+
+public static void sauvegarder(Connexion connex, Nomenclature nomen)
+{
+	Statement statement = connexion.createStatement();
+	
+	
+	Set cles = les_entrees.keySet(); //on recupère toutes les clés (code) de notre nomenclature
+	Iterator it = cles.iterator();
+	while (it.hasNext())
+	{ 
+	   //on parcours les Entrée
+	   String code = it.next(); 
+	   Entree entree = les_entrees.get(code); 
+	   int niveau = getNiveau(entree);
+	   String table = "NIV"+niveau;
+	   statement.executeUpdate("INSERT INTO "+table+" (code,libelle) VALUES ('"+entree.getCode()+"','"+entree.getLibelle()+"')");
+	   
+	}
+}
