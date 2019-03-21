@@ -42,6 +42,7 @@ public Personne(int ident)
 		
 		if(result.next())
 		{
+			//on a bien trouvé la personne, on recupère ses informations
 			this.ident = result.getInt("");
 			this.nom = result.getString("nom");
 			this.prenom = result.getString("prenom");			
@@ -53,6 +54,7 @@ public Personne(int ident)
 			this.nom = "inconnu";
 			this.prenom = "inconnu";			
 		}
+		statement.close();
 	}
 	catch(Exception e)
 	{
@@ -60,6 +62,77 @@ public Personne(int ident)
 		this.ident = -1;
 		this.nom = "inconnu";
 		this.prenom = "inconnu";
+	}	
+}
+
+
+
+Question 2.2
+
+class RessourcesExam
+{
+	//cette variable va contenir les personnes déjà extraite
+	public static HashMap<Integer,Personne> personnes = new HashMap<Integer,Personne>();
+	
+	public static Personne extrairePersonne(int ident)
+	{
+		if(personnes.containsKey(ident))
+			return personnes.get(ident); //on retourne la personne stocké ayant comme identifiant ident
+		else 
+		{
+			Personne p = new Personne(ident);//il recupèrela personne dans la base de données
+			if(p.getIdent()==-1) //il n'a rien trouvé 
+				return null;
+			else
+			{
+				//si on a trouvé une personne sur ce identifiant
+				personnes.put(p.getIdent(),p) //on l'enregistre
+				return p;
+			}
+		}
 	}
+}
+
+
+Question 2.3
+
+public void extraireAuteurs()
+{
+	try
+	{
+		Connexion connexion = RessourcesExam.getConnexion(); //on se connecte à la base de données
+		Statement statement = connexion.createStatement();
+		String query = "SELECT * FROM AUTEUR_LIVRE WHERE ident_livre="+this.ident+ " ORDER BY ordre_apparition";
+		
+		ResultSet result = statement.executeQuery(query);
+		
+		while(result.next())
+		{
+			int ident_personne = result.getInt("ident_personne");
+			Personne p = new Personne(ident_personne); //un auteur de ce livre
+			auteurs.add(p);
+		}
+		statement.close();
+	}
+}
+
+
+Question 2.4
+//PAS FINI ENCORE
+public void sauvegarder() 
+{
+	try 
+	{
+		Connexion connexion = RessourcesExam.getConnexion();
+		Statement statement = connexion.createStatement();
+		//insertion du livre
+		String query_livre = "INSERT INTO LIVRE (ident,titre,annee,editeur) VALUES ";
+		query_livre = query_livre + "("
+		statement.executeQuery("
+		
+		statement.executeUpdate("INSERT INTO "+table+" (code,libelle) VALUES ('"+entree.getCode()+"','"+entree.getLibelle()+"')");
+		
+	}
+	
 	
 }
