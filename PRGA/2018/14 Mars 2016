@@ -118,7 +118,7 @@ public void extraireAuteurs()
 
 
 Question 2.4
-//PAS FINI ENCORE
+
 public void sauvegarder() 
 {
 	try 
@@ -127,16 +127,19 @@ public void sauvegarder()
 		Statement statement = connexion.createStatement();
 		//insertion du livre
 		String query_livre = "INSERT INTO LIVRE (ident,titre,annee,editeur) VALUES ";
-		query_livre = query_livre + "("+this.ident+","+this.titre+","+this.annee+","+this.editeur+")";
+		query_livre = query_livre + "("+this.getIdent()+","+this.getTitre()+","+this.getAnnee()+","+this.getEditeur()+")";
 		statement.executeUpdate(query_livre);
+		int ordre = 1;
 		for( Personne p : auteurs)
 		{
-		    String query_auteurs = "INSERT INTO LIVRE_AUTEUR (ident,titre,annee,editeur) VALUES ";
-		    query_auteurs = query_livre + "("+this.ident+","+this.titre+","+this.annee+","+this.editeur+")";
-		s
+		    String query_auteurs = "INSERT INTO AUTEUR _LIVRE(ident_personne,ident_livre,ordre_apparition) VALUES ";
+		    query_auteurs = query_auteurs + "("+p.getIdent()+","+this.getIdent()+","+ordre+")";
+		    statement.executeUpdate(query_auteurs);
+		    
+		    ordre++;
 		}
-		statement.executeUpdate("INSERT INTO "+table+" (code,libelle) VALUES ('"+entree.getCode()+"','"+entree.getLibelle()+"')");
 		
+		statement.close();
 	}
 	
 	
