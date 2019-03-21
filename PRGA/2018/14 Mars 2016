@@ -127,9 +127,14 @@ public void sauvegarder()
 		Statement statement = connexion.createStatement();
 		//insertion du livre
 		String query_livre = "INSERT INTO LIVRE (ident,titre,annee,editeur) VALUES ";
-		query_livre = query_livre + "("
-		statement.executeQuery("
-		
+		query_livre = query_livre + "("+this.ident+","+this.titre+","+this.annee+","+this.editeur+")";
+		statement.executeUpdate(query_livre);
+		for( Personne p : auteurs)
+		{
+		    String query_auteurs = "INSERT INTO LIVRE_AUTEUR (ident,titre,annee,editeur) VALUES ";
+		    query_auteurs = query_livre + "("+this.ident+","+this.titre+","+this.annee+","+this.editeur+")";
+		s
+		}
 		statement.executeUpdate("INSERT INTO "+table+" (code,libelle) VALUES ('"+entree.getCode()+"','"+entree.getLibelle()+"')");
 		
 	}
