@@ -1,0 +1,65 @@
+Problème 1
+
+@Test
+public void testTirageAvecRemise()
+{
+	//int[] ou Integer[] , pas il n'y a pas de type integer
+	int[] tab = {1,2,...,10}; //j'ai la paresse de tout ecrire
+	Urne urne = new Urne(tab);
+	int size = urne.taille();
+	
+	for(int j=1;j<=Nombre_Tirage;j++)
+	{
+		urne.tirageAvecRemise(3);
+		assertEquals(size,urne.taille());
+		Set<Integer> ensemble = urne.getBoules();
+		for(int i=1; i<=tab.lenght;i++)
+		{
+			assertTrue(ensemble.contains(tab[i]));
+		}
+	}	
+}
+
+
+
+
+
+Problème 2
+
+
+Question 2.1
+
+public Personne(int ident)
+{
+	//on ira chercher dans la base de données la personne ayant pour identifiant ident 
+	//passé en paramètre
+	try
+	{
+		Connexion connexion = RessourcesExam.getConnexion(); //on se connecte à la base de données
+		Statement statement = connexion.createStatement();
+		String query = "SELECT * FROM personnes WHERE ident="+ident;
+		ResultSet result = statement.executeQuery(query);
+		
+		if(result.next())
+		{
+			this.ident = result.getInt("");
+			this.nom = result.getString("nom");
+			this.prenom = result.getString("prenom");			
+		}
+		else
+		{
+			//la personne n'existe pas dans la base de données 
+			this.ident = -1;
+			this.nom = "inconnu";
+			this.prenom = "inconnu";			
+		}
+	}
+	catch(Exception e)
+	{
+		//il y a une exception
+		this.ident = -1;
+		this.nom = "inconnu";
+		this.prenom = "inconnu";
+	}
+	
+}
